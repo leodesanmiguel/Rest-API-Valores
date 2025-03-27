@@ -3,7 +3,8 @@
  * 
  */
 
-import { IAccion } from "../models/accion";
+
+import { IAccion } from './../models/accion';
 import { createAccionService, getAccionesService } from "../services/accionService";
 import { Request, Response } from 'express';
 //import { getValoresService, createValorService } from '../services/valor.service';
@@ -39,7 +40,11 @@ export const getAccionesController = async (req: Request, res: Response) => {
 //};
 export const createAccionController = async (req: Request, res: Response) => {
   try {
-    const accion = await createAccionService(req.body);
+    // validar los datos recibidos
+    const accionData: IAccion = req.body;
+
+    // Llamamos al servicio para crear la acción
+    const accion = await createAccionService(accionData);
     res.status(201).json(accion);
   }
   catch (e) {

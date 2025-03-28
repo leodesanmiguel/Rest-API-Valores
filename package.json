@@ -21,6 +21,7 @@
     "npm": "^11.2.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.0",
     "@types/mongoose": "^5.11.96",
     "@types/morgan": "^1.9.9",

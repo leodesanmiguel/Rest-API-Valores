@@ -6,7 +6,7 @@
 import express, { Application }   from 'express';
 import dotenv    from 'dotenv';
 import morgan from 'morgan';
-import { createAccionController, getAccionesController } from '../controllers/acciónController';
+import { createAccionController, getAccionesController } from '../controllers/accionController';
 //import connectDB from '../config/mongodb';
 //import { getValoresController, createValorController } from '../controllers/valor.controller';
 

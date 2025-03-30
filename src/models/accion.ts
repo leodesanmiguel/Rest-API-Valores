@@ -61,5 +61,22 @@ export const AccionModel = model<IAccion>('Accion', accionSchema);
 //export default mongoose.model<IAccion>('Accion', accionSchema);
 
 
-
+/**
+ * 
+ * 
+{
+  "Ticker": "",
+  "Nombre": "",
+  "Fecha": "",
+  "Hora": "",
+  "Ultimo_precio": "",
+  "variacion": "",
+  "Volumen": "",
+  "Apertura": "",
+  "Minimo": "",
+  "Maximo": "",
+  "Cierre_anterior": "",
+  "Ultima_cotización": ""
+}
+ */
 

@@ -3,7 +3,7 @@
  * 
  */
 
-import { IAccion } from "../models/accion";
+import { AccionModel, IAccion } from "../models/accion";
 import { getAcciones } from "../repositories/accionRepository";
 
 //import { getValores, createValor } from '../repositories/valor.repository';
@@ -20,8 +20,12 @@ export const getAccionesService = async (): Promise<IAccion[]> => {
 // export const createValorService = async (valor: IValor): Promise<IValor> => {
 //   return createValor(valor);
 // };
-export const createAccionService = async (accion: IAccion): Promise<IAccion> => {
-  return accion;  
+export const createAccionService = async (accionData: IAccion): Promise<IAccion> => {
+  // Creamos una nueva instancia del modelo con los datos recibidos
+  const nuevaAccion = new AccionModel(accionData);
+
+  // Guardamos el registro en la base de datos
+  return await nuevaAccion.save();
 }
 
 

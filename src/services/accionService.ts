@@ -3,9 +3,11 @@
  * 
  */
 
-import { AccionModel, IAccion } from "../models/accion";
+import { AccionModel, IAccion, IAccion2 } from "../models/accion";
 import { getAcciones } from "../repositories/accionRepository";
-
+import fs from 'fs';
+import path from 'path';
+import csv from 'csv-parser';
 //import { getValores, createValor } from '../repositories/valor.repository';
 //import { IValor } from '../models/valor';
 
@@ -29,4 +31,46 @@ export const createAccionService = async (accionData: IAccion): Promise<IAccion>
 }
 
 
-// Agrega aquí la lógica de negocio adicional.
+export const loadCSVAccionToMongoDB = async (filePath: string): Promise<void> => {
+  const results: IAccion[] = [];
+  const fullPath = path.join(__dirname, filePath);
+  try {
+    // Lee el archivo CSV y procesa cada fila
+    await new Promise<void>((resolve, reject) => {
+      fs.createReadStream(fullPath)
+        .pipe(csv())
+        .on('data', (data) => {
+          try {
+
+
+          } catch (conversionError) {
+            const error = conversionError as Error;
+            console.error('Error al procesar la fila:', data, error);
+          }
+        })
+        .on('end', () => {
+          console.log('Archivo CSV procesado correctamente.');
+          resolve();
+        })
+        .on('error', (error) => {
+          console.error('Error al procesar el archivo CSV:', error);
+          reject(error);
+        });
+    });
+
+    // Aquí puedes agregar la lógica para guardar los datos en MongoDB
+    console.log('Datos procesados:', results);
+  } catch (e) {
+    const error = e as Error;
+    console.error('Error al cargar el archivo CSV:', error);
+    
+  };
+  
+};
+
+export const loadCSVAccionToMongoDB2 = async (filePath: string): Promise<void> => {
+  const results: IAccion2[] = [];
+  const fullPath = path.join(__dirname, filePath);
+ 
+  
+};

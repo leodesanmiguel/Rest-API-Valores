@@ -34,29 +34,40 @@ export interface IAccion extends Document {
   Minimo: string;
   Maximo: string;
   Cierre_anterior: string;
-  Ultima_cotización: Date;
-
+  Ultima_cotizacion: Date;
 }
 
+
 const accionSchema: Schema = new Schema({
-  // nombre: { type: String, required: true },
-  // valor: { type: Number, required: true },
   Ticker:{type: String, required: true} ,
   Nombre:{type: String, required: true} ,
   Fecha:{type: Date, required: true} ,
   Hora:{type: String, required: true} ,
   Ultimo_precio:{type: String, required: true} ,
   variacion:{type: String, required: false} ,
-  Volumen:{type: String, required: false} ,
+  Volumen:{type: Number, required: false} ,
   Apertura:{type: String, required: true} ,
   Minimo:{type: String, required: true} ,
   Maximo:{type: String, required: true} ,
   Cierre_anterior:{type: String, required: true} ,
-  Ultima_cotización:{type: String, required: false} ,
+  Ultima_cotizacion:{type: String, required: false} ,
+});
+
+
+export interface IAccion2 extends Document {
+  Ticker: string;
+  Nombre: string;
+}
+
+const accionSchema2: Schema = new Schema({
+  Ticker:{type: String, required: true} ,
+  Nombre: { type: String, required: true },
 });
 
 // Creamos el modelo a partir del esquema
 export const AccionModel = model<IAccion>('Accion', accionSchema);
+
+export const AccionModel2 = model<IAccion2>('Accion', accionSchema2);
 
 //export default mongoose.model<IAccion>('Accion', accionSchema);
 

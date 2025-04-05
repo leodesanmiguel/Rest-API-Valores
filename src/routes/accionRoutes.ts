@@ -9,13 +9,12 @@ import {
 } from '../controllers/accionController';
 
 
-const router = express.Router();
+const accionRoutes = express.Router();
 
-router.get('/', getAccionesController); // La ruta completa sería /api/v1/acciones
-router.post('/', createAccionController); // La ruta completa sería /api/v1/acciones
+accionRoutes.get('/', getAccionesController); // La ruta completa sería /api/v1/acciones
+accionRoutes.post('/', createAccionController); // La ruta completa sería /api/v1/acciones
+accionRoutes.get('/file', getFileAccionesController); // La ruta completa sería /api/v1/acciones/file
+accionRoutes.get('/archivo', getAccionesFileController ); // La ruta completa sería /api/v1/acciones/file
+accionRoutes.get('/qqq', qq); // La ruta completa sería /api/v1/acciones/qqq
 
-router.get('/file', getFileAccionesController); // La ruta completa sería /api/v1/acciones/file
-router.get('/file', getAccionesFileController ); // La ruta completa sería /api/v1/acciones/file
-router.get('/qqq', qq); // La ruta completa sería /api/v1/acciones/qqq
-
-export default router;
+export default accionRoutes;

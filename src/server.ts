@@ -2,20 +2,20 @@
  * El punto de entrada de la aplicación.
  * 
  */
-import express, { Application }   from 'express';
+import express   from 'express';
 import dotenv    from 'dotenv';
 import morgan from 'morgan';
-//import { createAccionController, getAccionesController, getFileAccionesController } from '../controllers/accionController';
-//import connectDB from '../config/mongodb';
-//import { getValoresController, createValorController } from '../controllers/valor.controller';
 import accionRoutes from './routes/accionRoutes';
 import "./config/mongodb";
+
 dotenv.config();
 
-const app: Application = express();
-
+const app = express();
+// Middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
+// Rutas
 app.use("/api/v1/acciones", accionRoutes);
 
 //connectDB();

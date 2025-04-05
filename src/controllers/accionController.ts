@@ -18,25 +18,6 @@ dotenv.config(); // Cargar variables de entorno desde el archivo .env
 const dataFolder = process.env.DATA_FOLDER || './src/utils'; // Ruta por defecto si DATA_FOLDER no está definido
 
 
-export const qq = async (req: Request, res: Response,  next: NextFunction): Promise<void> => {
-  try {
-    const palabra = req.query.palabra as string;
-    if (!palabra) {
-      console.error('⚠️ Palabra es requerida ');
-      res.status(400).json({ error: '⚠️ Palabra es requerida ' });
-    }
-    // Aquí puedes realizar la lógica que necesites con la palabra
-    const qqA: IAccion[] = await getAccionesService2(palabra);
-    res.json(qqA);
-  } catch (e) {
-    const error = e as Error;
-    console.error('Error al leer el archivo:', error);
-    res.status(500).json({ error: 'Internal Server Error', message: error.message });
-  } 
-};
-
-
-
 export const getAccionesController = async (req: Request, res: Response,  next: NextFunction):Promise<void> => {
   try {
     const acciones: IAccion[] = await getAccionesService();
@@ -47,7 +28,6 @@ export const getAccionesController = async (req: Request, res: Response,  next: 
     res.status(500).json({ error: 'Internal Server Error', message: error.message });
   }
 };
-
 
 export const createAccionController = async (req: Request, res: Response,  next: NextFunction) => {
   try {
@@ -65,6 +45,7 @@ export const createAccionController = async (req: Request, res: Response,  next:
   }
 };
 
+
 export const getAccionesFileController = async (req: Request, res: Response) => {
   try {
     const filename = req.query.filename as string;
@@ -79,6 +60,25 @@ export const getAccionesFileController = async (req: Request, res: Response) => 
     return res.status(500).json({ error: 'Internal Server Error', message: error.message });
   }
 };
+
+
+export const qq = async (req: Request, res: Response,  next: NextFunction): Promise<void> => {
+  try {
+    const palabra = req.query.palabra as string;
+    if (!palabra) {
+      console.error('⚠️ Palabra es requerida ');
+      res.status(400).json({ error: '⚠️ Palabra es requerida ' });
+    }
+    // Aquí puedes realizar la lógica que necesites con la palabra
+    const qqA: IAccion[] = await getAccionesService2(palabra);
+    res.json(qqA);
+  } catch (e) {
+    const error = e as Error;
+    console.error('Error al leer el archivo:', error);
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  } 
+};
+
 
 
 

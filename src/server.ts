@@ -8,14 +8,15 @@ import morgan from 'morgan';
 //import { createAccionController, getAccionesController, getFileAccionesController } from '../controllers/accionController';
 //import connectDB from '../config/mongodb';
 //import { getValoresController, createValorController } from '../controllers/valor.controller';
-import accionRoutes from '../routes/accionRoutes';
-import "../config/mongodb";
+import accionRoutes from './routes/accionRoutes';
+import "./config/mongodb";
 dotenv.config();
 
-const app:Application = express();
+const app: Application = express();
+
 app.use(express.json());
 app.use(morgan('dev'));
-app.use("/api/v1", accionRoutes);
+app.use("/api/v1/acciones", accionRoutes);
 
 //connectDB();
 

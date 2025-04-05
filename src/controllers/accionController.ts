@@ -1,12 +1,15 @@
-import { AccionService } from '../services/accionService';
 /**
  * Los controladores para las rutas de la API.
  * 
  */
 
-import { AccionModel, IAccion } from './../models/accion';
-import { createAccionService, getAccionesService } from "../services/accionService";
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
+import { IAccion } from './../models/accion';
+import {
+  AccionService,
+  getAccionesService,
+  getAccionesService2
+} from "../services/accionService";
 import path from 'path';
 import dotenv from 'dotenv';
 
@@ -15,7 +18,26 @@ dotenv.config(); // Cargar variables de entorno desde el archivo .env
 const dataFolder = process.env.DATA_FOLDER || './src/utils'; // Ruta por defecto si DATA_FOLDER no está definido
 
 
-export const getAccionesController = async (req: Request, res: Response) => {
+export const qq = async (req: Request, res: Response,  next: NextFunction): Promise<void> => {
+  try {
+    const palabra = req.query.palabra as string;
+    if (!palabra) {
+      console.error('⚠️ Palabra es requerida ');
+      res.status(400).json({ error: '⚠️ Palabra es requerida ' });
+    }
+    // Aquí puedes realizar la lógica que necesites con la palabra
+    const qqA: IAccion[] = await getAccionesService2(palabra);
+    res.json(qqA);
+  } catch (e) {
+    const error = e as Error;
+    console.error('Error al leer el archivo:', error);
+    res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  } 
+};
+
+
+
+export const getAccionesController = async (req: Request, res: Response,  next: NextFunction):Promise<void> => {
   try {
     const acciones: IAccion[] = await getAccionesService();
     res.json(acciones);
@@ -27,13 +49,14 @@ export const getAccionesController = async (req: Request, res: Response) => {
 };
 
 
-export const createAccionController = async (req: Request, res: Response) => {
+export const createAccionController = async (req: Request, res: Response,  next: NextFunction) => {
   try {
     // validar los datos recibidos
-    const accionData: IAccion = req.body;
+    const accionData: string = req.body;
 
     // Llamamos al servicio para crear la acción
-    const accion = await createAccionService(accionData);
+    const accionService = new AccionService();
+    const accion = await accionService.leerFileAccion(accionData);
     res.status(201).json(accion);
   }
   catch (e) {
@@ -41,6 +64,23 @@ export const createAccionController = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal Server Error', message: error.message });
   }
 };
+
+export const getAccionesFileController = async (req: Request, res: Response) => {
+  try {
+    const filename = req.query.filename as string;
+    if (!filename) {
+      console.error('⚠️ Filename is required ');
+    }
+    res.json({ filename });
+  }
+  catch (e) {
+    const error = e as Error;
+    console.error('Error al leer el archivo:', error);
+    return res.status(500).json({ error: 'Internal Server Error', message: error.message });
+  }
+};
+
+
 
 
 export const getFileAccionesController = async (req: Request, res: Response) => {

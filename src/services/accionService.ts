@@ -4,13 +4,17 @@
  */
 
 import { AccionModel, IAccion } from "../models/accion";
-import { getAcciones } from "../repositories/accionRepository";
+import { getAcciones, getAcciones2 } from "../repositories/accionRepository";
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
 
 export const getAccionesService = async (): Promise<IAccion[]> => {
   return getAcciones();
+}
+
+export const getAccionesService2 = async (palabra:string): Promise<IAccion[]> => {
+  return getAcciones2(palabra);
 }
 
 

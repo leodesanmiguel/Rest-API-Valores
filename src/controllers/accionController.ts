@@ -1,8 +1,3 @@
-/**
- * Los controladores para las rutas de la API.
- * 
- */
-
 import { Request, Response, NextFunction } from 'express';
 import { IAccion } from './../models/accion';
 import {
@@ -83,7 +78,7 @@ export const qq = async (req: Request, res: Response,  next: NextFunction): Prom
 
 
 
-export const getFileAccionesController = async (req: Request, res: Response) => {
+export const leerArchvivo = async (req: Request, res: Response) => {
   try {
 
     const filename = req.query.filename as string;

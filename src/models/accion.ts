@@ -28,7 +28,7 @@ const accionSchema: Schema = new Schema({
   Minimo:{type: String, required: true} ,
   Maximo:{type: String, required: true} ,
   Cierre_anterior:{type: String, required: true} ,
-  Ultima_cotizacion:{type: Schema.Types.Mixed, required: false} , // Mixto-> puede ser Date o String
+  Ultima_cotizacion: { type: Schema.Types.Mixed, required: false }, // Mixto-> puede ser Date o String
 });
 
 // Creamos el modelo a partir del esquema

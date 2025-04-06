@@ -1,3 +1,4 @@
+
 /**
  * La lógica de negocio para los valores.
  * 
@@ -8,7 +9,7 @@ import { getAcciones, getAcciones2 } from "../repositories/accionRepository";
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
-
+/*
 export const getAccionesService = async (): Promise<IAccion[]> => {
   return getAcciones();
 }
@@ -17,16 +18,31 @@ export const getAccionesService2 = async (palabra:string): Promise<IAccion[]> =>
   return getAcciones2(palabra);
 }
 
-
-//export const createAccionService = async (accionDataString: IAccion): Promise<IAccion> => {
-//  // Creamos una nueva instancia del modelo con los datos recibidos
-//  const nuevaAccion = new AccionModel(accionData);
-//
-//  // Guardamos el registro en la base de datos
-//  return await nuevaAccion.save();
-//}
+export const leerMiArchivoService = async (filePath: string) => {
+  const fullPath = path.join(__dirname, filePath);
+  
+  console.log('Leyendo archivo:', fullPath);
+  };
+*/
+ 
 
 export class AccionService {
+
+  public async getAccionesService_(): Promise<IAccion[]> {
+    return getAcciones();
+  }
+  public async getAccionesService2_(palabra: string): Promise<IAccion[]> {
+    return getAcciones2(palabra);
+  }
+  public async createAccionService (reg: IAccion): Promise<void>  {
+    console.log('Registro Recibido:', reg);
+    const accion = new AccionModel(reg);
+    const resultado = await accion.save();  
+    console.log('Registro Guardado:', resultado);
+
+  }
+
+  /*
   async leerFileAccion(filePath: string): Promise<IAccion[]> {
     const fullPath = path.join(__dirname, filePath);
     const resultados: IAccion[] = [];
@@ -38,19 +54,18 @@ export class AccionService {
           try {
             // Convierte cada fila a un objeto IAccion
             const accion: IAccion = {
-              //id: dataString.id,
-              Ticker: this.parseTicker(data.Ticker),
-              Nombre: this.parseNombre(data.nombre),
-              Fecha: this.parseDate(data.Fecha),
-              Hora: this.parseHora(data.Hora),
-              Ultimo_precio: this.parseUltimo_precio(data.Ultimo_precio),
-              variacion: this.parseVariacion(data.variacion),
-              Volumen: this.parseVolumen(data.Volumen),
-              Apertura: this.parseApertura(data.Apertura),
-              Minimo: this.parseMinimo(data.Minimo),
-              Maximo: this.parseMaximo(data.Maximo),
-              Cierre_anterior: this.parseCierre_anterior(data.Cierre_anterior),
-              Ultima_cotizacion: this.parseUltima_cotizacion(data.Ultima_cotizacion),
+              Ticker: this.parseTicker(data.Ticker) || '--',
+              Nombre: this.parseNombre(data.nombre) || '--',
+              Fecha: this.parseDate(data.Fecha) || new Date(),
+              Hora: this.parseHora(data.Hora) || '0:00',
+              Ultimo_precio: this.parseUltimo_precio(data.Ultimo_precio) || '0',
+              variacion: this.parseVariacion(data.variacion) || '0',
+              Volumen: this.parseVolumen(data.Volumen) || 0,
+              Apertura: this.parseApertura(data.Apertura) || '0',
+              Minimo: this.parseMinimo(data.Minimo) || '0',
+              Maximo: this.parseMaximo(data.Maximo) || '0',
+              Cierre_anterior: this.parseCierre_anterior(data.Cierre_anterior) || '0',
+              Ultima_cotizacion: this.parseUltima_cotizacion(data.Ultima_cotizacion) || new Date().toISOString(),
             };
             resultados.push(accion);
           } catch (conversionError) {
@@ -68,8 +83,9 @@ export class AccionService {
           reject(error);
         });
     });
+    
   }
-
+*/
 
   private parseTicker(dataString: string): string {
     return dataString.trim(); // Elimina espacios en blanco

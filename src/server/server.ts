@@ -5,8 +5,8 @@
 import express   from 'express';
 import dotenv    from 'dotenv';
 import morgan from 'morgan';
-import accionRoutes from './routes/accionRoutes';
-import "./config/mongodb";
+import accionRoutes from '../routes/accionRoutes';
+import "../config/mongodb";
 
 dotenv.config();
 

@@ -38,19 +38,18 @@ export class AccionService {
           try {
             // Convierte cada fila a un objeto IAccion
             const accion: IAccion = {
-              //id: dataString.id,
-              Ticker: this.parseTicker(data.Ticker),
-              Nombre: this.parseNombre(data.nombre),
-              Fecha: this.parseDate(data.Fecha),
-              Hora: this.parseHora(data.Hora),
-              Ultimo_precio: this.parseUltimo_precio(data.Ultimo_precio),
-              variacion: this.parseVariacion(data.variacion),
-              Volumen: this.parseVolumen(data.Volumen),
-              Apertura: this.parseApertura(data.Apertura),
-              Minimo: this.parseMinimo(data.Minimo),
-              Maximo: this.parseMaximo(data.Maximo),
-              Cierre_anterior: this.parseCierre_anterior(data.Cierre_anterior),
-              Ultima_cotizacion: this.parseUltima_cotizacion(data.Ultima_cotizacion),
+              Ticker: this.parseTicker(data.Ticker) || '--',
+              Nombre: this.parseNombre(data.nombre) || '--',
+              Fecha: this.parseDate(data.Fecha) || new Date(),
+              Hora: this.parseHora(data.Hora) || '0:00',
+              Ultimo_precio: this.parseUltimo_precio(data.Ultimo_precio) || '0',
+              variacion: this.parseVariacion(data.variacion) || '0',
+              Volumen: this.parseVolumen(data.Volumen) || 0,
+              Apertura: this.parseApertura(data.Apertura) || '0',
+              Minimo: this.parseMinimo(data.Minimo) || '0',
+              Maximo: this.parseMaximo(data.Maximo) || '0',
+              Cierre_anterior: this.parseCierre_anterior(data.Cierre_anterior) || '0',
+              Ultima_cotizacion: this.parseUltima_cotizacion(data.Ultima_cotizacion) || new Date().toISOString(),
             };
             resultados.push(accion);
           } catch (conversionError) {

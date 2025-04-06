@@ -8,7 +8,7 @@ import { getAcciones, getAcciones2 } from "../repositories/accionRepository";
 import fs from 'fs';
 import path from 'path';
 import csv from 'csv-parser';
-
+/*
 export const getAccionesService = async (): Promise<IAccion[]> => {
   return getAcciones();
 }
@@ -17,16 +17,28 @@ export const getAccionesService2 = async (palabra:string): Promise<IAccion[]> =>
   return getAcciones2(palabra);
 }
 
-
-//export const createAccionService = async (accionDataString: IAccion): Promise<IAccion> => {
-//  // Creamos una nueva instancia del modelo con los datos recibidos
-//  const nuevaAccion = new AccionModel(accionData);
-//
-//  // Guardamos el registro en la base de datos
-//  return await nuevaAccion.save();
-//}
+export const leerMiArchivoService = async (filePath: string) => {
+  const fullPath = path.join(__dirname, filePath);
+  
+  console.log('Leyendo archivo:', fullPath);
+  };
+*/
+ 
 
 export class AccionService {
+
+  public async getAccionesService_(): Promise<IAccion[]> {
+    return getAcciones();
+  }
+  public async getAccionesService2_(palabra: string): Promise<IAccion[]> {
+    return getAcciones2(palabra);
+  }
+  public async leerMiArchivoService_(filePath: string) {
+    const fullPath = path.join(__dirname, filePath);
+    console.log('Leyendo archivo:', fullPath);
+  }
+
+  /*
   async leerFileAccion(filePath: string): Promise<IAccion[]> {
     const fullPath = path.join(__dirname, filePath);
     const resultados: IAccion[] = [];
@@ -67,8 +79,9 @@ export class AccionService {
           reject(error);
         });
     });
+    
   }
-
+*/
 
   private parseTicker(dataString: string): string {
     return dataString.trim(); // Elimina espacios en blanco

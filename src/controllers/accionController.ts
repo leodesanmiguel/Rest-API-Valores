@@ -40,30 +40,22 @@ export class AccionController {
     }
   }
   
-/* 
-  public async getAccionesController(req: Request, res: Response, next: NextFunction): Promise<IAccion[]> {
-    try {
-      const acciones: IAccion[] = await this.accionService.getAccionesService_();
-      res.json(acciones);
-      return acciones;
-    } catch (e) {
-      const error = e as Error;
-      console.error('Error al obtener las acciones:', error);
-      res.status(500).json({ error: 'Internal Server Error', message: error.message });
-      return [] // Retornar un array vacío en caso de error
-      //throw error; // Propagar el error para que el controlador lo maneje
-    }
-  }
-  
- */
-  
-  public async createAccionController(req: Request, res: Response, next: NextFunction): Promise<void> {
+ 
+  public createAccionController: ExpressHandler = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       // validar los datos recibidos
-      const accionData: string = req.body;
+      const accionData: IAccion = req.body;
+      if (!accionData) {
+        res.status(400).json({ error: '⚠️ Acción data is required ' });
+      }
       // Llamamos al servicio para crear la acción
       //const accionService = new AccionService();
-      const accion = await this.accionService.leerMiArchivoService_(accionData);
+      //console.log('accionData:', accionData);
+      const accion = await this.accionService.createAccionService(accionData);
       res.status(201).json(accion);
     }
     catch (e) {

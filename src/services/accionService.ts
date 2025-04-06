@@ -1,3 +1,4 @@
+
 /**
  * La lógica de negocio para los valores.
  * 
@@ -33,9 +34,12 @@ export class AccionService {
   public async getAccionesService2_(palabra: string): Promise<IAccion[]> {
     return getAcciones2(palabra);
   }
-  public async leerMiArchivoService_(filePath: string) {
-    const fullPath = path.join(__dirname, filePath);
-    console.log('Leyendo archivo:', fullPath);
+  public async createAccionService (reg: IAccion): Promise<void>  {
+    console.log('Registro Recibido:', reg);
+    const accion = new AccionModel(reg);
+    const resultado = await accion.save();  
+    console.log('Registro Guardado:', resultado);
+
   }
 
   /*

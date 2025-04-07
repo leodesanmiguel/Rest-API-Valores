@@ -19,7 +19,7 @@ export interface IAccion extends Document {
 const accionSchema: Schema = new Schema({
   Ticker:{type: String, required: true} ,
   Nombre:{type: String, required: true} ,
-  Fecha:{type: Date, required: true} ,                            // Date
+  Fecha:{type: Date, required: false} ,                            // Date
   Hora:{type: String, required: true} ,
   Ultimo_precio:{type: String, required: true} ,
   variacion:{type: String, required: false} ,
@@ -27,7 +27,7 @@ const accionSchema: Schema = new Schema({
   Apertura:{type: String, required: true} ,
   Minimo:{type: String, required: true} ,
   Maximo:{type: String, required: true} ,
-  Cierre_anterior:{type: String, required: true} ,
+  Cierre_anterior:{type: String, required: false} ,
   Ultima_cotizacion: { type: Schema.Types.Mixed, required: false }, // Mixto-> puede ser Date o String
 });
 

@@ -9,7 +9,7 @@ const accionController = new AccionController();
 accionRoutes.post('/uno', accionController.createAccionController.bind(accionController)); 
 
 accionRoutes.get('/todos', accionController.getAccionesController.bind(accionController)); 
-//accionRoutes.get('/file', leerMiArchvivoController ); // La ruta completa sería /api/v1/acciones/file
-//accionRoutes.get('/qqq', qq); // La ruta completa sería /api/v1/acciones/qqq
+
+accionRoutes.post('/up', accionController.uploadArchivoAccionesController.bind(accionController) ); // La ruta completa sería /api/v1/acciones/file
 
 export default accionRoutes;

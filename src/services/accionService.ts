@@ -31,9 +31,7 @@ export class AccionService {
   public async getAccionesService_(): Promise<IAccion[]> {
     return getAcciones();
   }
-  public async getAccionesService2_(palabra: string): Promise<IAccion[]> {
-    return getAcciones2(palabra);
-  }
+ 
   public async createAccionService (reg: IAccion): Promise<void>  {
     console.log('Registro Recibido:', reg);
     const accion = new AccionModel(reg);
@@ -87,43 +85,7 @@ export class AccionService {
   }
 */
 
-  private parseTicker(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseNombre(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseDate(dateString: string): Date {
-    const [day, month, year] = dateString.split('/');
-    return new Date(`${year}-${month}-${day}`); // Ajusta el mes restando 1
-  }
-  private parseHora(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseUltimo_precio(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseVariacion(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseVolumen(dataString: string): number {
-    return  dataString? parseInt(dataString.trim().replace(/\./g,''),10): 0; // Elimina espacios en blanco
-  }
-  private parseApertura(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseMinimo(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseMaximo(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseCierre_anterior(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
-  private parseUltima_cotizacion(dataString: string): string {
-    return dataString.trim(); // Elimina espacios en blanco
-  }
+
 
 }
 

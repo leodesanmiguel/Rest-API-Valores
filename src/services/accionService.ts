@@ -24,6 +24,31 @@ export class AccionService {
 
   }
 
+    
+/**
+ * 
+ * @param reg Registro de las acciones u otros activos
+ * @returns void
+ * @description Crea un nuevo registro de acción en la base de datos.
+ * Recibe el registro tal cual lo recibe el controlador y lo guarda en la base de datos.
+ * Se utiliza para guardar registros de acciones desde el archivo CSV.
+ * @throws Error si ocurre un error al guardar el registro.
+ * @example reg = {
+ *    Ticker: 'YPFDD',
+ *    Nombre: 'YPF',
+ *    Fecha: '27/08/2024',
+ *    Hora: '17:55:35',
+ *    'Último precio': 'US$ 21,75',
+ *    'VAR.': '1,40%',
+ *    Volumen: '72.735',
+ *    'Aper.': '21,55',
+ *    'Mínimo': '21,55',
+ *    'Máximo': '21,90',
+ *    'Cierre anterior': '21,45',
+ *    'Última cotización': '20:00',
+ *    '': 'Ver detalle  Operar'
+}
+ */
   public async createRegistryService (reg: any ): Promise<void>  {
     console.log('Registro Recibido:', reg);
     const accionData: IAccion = {
@@ -47,6 +72,38 @@ export class AccionService {
 
   }
 
+  
+  /**
+   * @name procesarRegistroCSV
+   * @description Procesar un registro CSV y lo guarda en la base de datos.
+   * 1) Recibir el registro tal cual lo recibe el controlador 
+   * 2) Convierte en el schema IAccion 
+   * 3) Enviar al método createAccionService 
+   * 4) Guardar en la base de datos.
+   * 
+   * @param row Registro de las acciones u otros activos
+   * @returns void
+   * @description Procesa un registro CSV y lo guarda en la base de datos.
+   * Recibe el registro tal cual lo recibe el controlador y lo guarda en la base de datos.
+   * Se utiliza para guardar registros de acciones desde el archivo CSV.
+   * @throws Error si ocurre un error al guardar el registro.
+   * @example row = {
+   *    Ticker: 'YPFDD',
+   *    Nombre: 'YPF',
+   *    Fecha: '27/08/2024',
+   *    Hora: '17:55:35',
+   *    'Último precio': 'US$ 21,75',
+   *    'VAR.': '1,40%',
+   *    Volumen: '72.735',
+   *    'Aper.': '21,55',
+   *    'Mínimo': '21,55',
+   *    'Máximo': '21,90',
+   *    'Cierre anterior': '21,45',
+   *    'Última cotización': '20:00',
+   *    '': 'Ver detalle  Operar'
+   *   }
+   
+   */
   public async procesarRegistroCSV(row: any): Promise<void> {
     try {
       const accionData: IAccion = {

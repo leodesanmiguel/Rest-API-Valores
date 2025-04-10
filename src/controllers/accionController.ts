@@ -99,31 +99,29 @@ export class AccionController {
       let registrosGuardados = 0;
       
       for (const row of resultados) {
-
+        const encontrado = {
+          'Nro:': registrosGuardados,
+          'Registro-->': row
+          };
+          console.log('encontrado:', encontrado);
         try {
           const accionData: IAccion = {
             Ticker: this.parseTicker(row.Ticker),
             Nombre: this.parseNombre(row.Nombre),
             Fecha: this.parseDate(String(row.Fecha)) || new Date(),
-            Hora: row.Hora,
-            Ultimo_precio:this.parseUltimo_precio(row.Ultimo_precio) || '0',
-            variacion: this.parseVariacion(row.variacion) || '0',
-            Volumen: this.parseVolumen(row.Volumen.toString()),
-            Apertura: this.parseApertura(row.Apertura),
-            Minimo: this.parseMinimo(row.Minimo),
-            Maximo: this.parseMaximo(row.Maximo),
-            Cierre_anterior: this.parseCierre_anterior(row.Cierre_anterior),
-            Ultima_cotizacion: this.parseUltima_cotizacion(String(row.Ultima_cotizacion)) || new Date().toISOString(),
+            Hora: row.Hora || '00:00:00',
+            Ultimo_precio: this.parseCadena(row.Ultimo_precio) || '0',
+            variacion: this.parseCadena(row.variacion) || '0',
+            Volumen: this.parseVolumen(row.Volumen.toString()) || 0,
+            Apertura: this.parseCadena(row.Apertura) || '0',
+            Minimo: this.parseCadena(row.Minimo) || '0',
+            Maximo: this.parseCadena(row.Maximo) || '0',
+            Cierre_anterior: this.parseCadena(row.Cierre_anterior) || '0',
+            Ultima_cotizacion: this.parseDate(String(row.Ultima_cotizacion)) || new Date(),
           } as IAccion;
-          res.json({
-          'Total resultados': resultados.length,
-          'Ruta archivo': filePath,
-          'Que Registro': row,
-          'encontrados': resultados[registrosGuardados]
-          
-        });
 
-          await this.accionService.createAccionService(accionData);
+          //await this.accionService.createAccionService(accionData);
+          await this.accionService.createRegistryService(row);
           registrosGuardados++;
         } catch (e) {
           const error = e as Error;
@@ -141,7 +139,7 @@ export class AccionController {
         nombre: req.query.nombrefile,
         folder: dataFolder,
         ruta: filePath,
-        resultados: resultados,
+        //resultados: resultados,
       });
 
     } catch (e) {
@@ -156,7 +154,9 @@ export class AccionController {
   // Aquí puedes agregar métodos para manejar las acciones
   // Por ejemplo, un método para crear una acción, obtener todas las acciones, etc.
   // Puedes usar el servicio de AccionService para interactuar con la base de datos
-
+  private parseCadena(dataString: string): string {
+    return dataString;
+  }
     private parseTicker(dataString: string): string {
     return dataString? dataString.toUpperCase(): '--'; // Elimina espacios en blanco y convierte a mayúsculas
   }
@@ -168,10 +168,10 @@ export class AccionController {
     return  new Date(`${year}-${month}-${day}`); // Ajusta el mes restando 1
   }
   private parseHora(dataString: string): string {
-    return dataString? dataString.toUpperCase(): '--'; // Elimina espacios en blanco y convierte a mayúsculas
+    return dataString;
   }
   private parseUltimo_precio(dataString: string): string {
-    return dataString? dataString.toUpperCase(): '--'; // Elimina espacios en blanco y convierte a mayúsculas
+    return dataString;
   }
   private parseVariacion(dataString: string): string {
     return dataString? dataString.toUpperCase(): '--'; // Elimina espacios en blanco y convierte a mayúsculas
